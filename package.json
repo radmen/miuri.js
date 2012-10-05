@@ -1,0 +1,19 @@
+{
+  "name": "miuri.js",
+  "version": "0.0.1",
+  "description": "Simple URI parser",
+  "main": "lib/miuri.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/radmen/miuri.js.git"
+  },
+  "keywords": [
+    "client",
+    "server",
+    "util",
+    "parser",
+    "uri"
+  ],
+  "author": "Radosław Mejer <radmen@gmail.com>",
+  "license": "MIT"
+}
