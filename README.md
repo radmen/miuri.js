@@ -6,6 +6,8 @@ It's designed to be used in browser, but it can be used as a NodeJS module.
 It can retrieve information:
 
 ```javascript
+miuri = require('miuri.js') // when run on Node.js
+
 uri = new miuri('http://google.com')  
 uri.hostname()  // google.com  
 uri.protocol()  // http  
