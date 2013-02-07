@@ -169,7 +169,9 @@ class Miuri
         uri += "#{@parts.username}@"
 
       uri += @parts.host
-
+      if @parts.port 
+        uri += ":#{@parts.port}"
+        
     uri += @parts.path
 
     query_parts = []
