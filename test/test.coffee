@@ -12,6 +12,17 @@ test("basic uri parsing", () ->
   equal(parsed.path(), '/')
 )
 
+test("various protocols", () ->
+  uri = new miuri("chrome-extension://extension/page.html")
+  equal(uri.protocol(), "chrome-extension")
+
+  uri = new miuri("http://google.com")
+  equal(uri.protocol(), "http")
+
+  uri = new miuri("https://google.com")
+  equal(uri.protocol(), "https")
+)
+
 test("complex uri parsing", () ->
   uri_str = 'ftp://user:pass@google.com:8080/data?foo=1&bar=2#more'
   parsed = new miuri(uri_str)
