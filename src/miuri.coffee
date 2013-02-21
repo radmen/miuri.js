@@ -7,7 +7,7 @@
 ###
 regex = ///
 
-  ^(?:(\w+|[-+\.]+)://)?     # protocol
+  ^(?:([A-Za-z-+\.]+)://)?     # protocol
   (?:
     (\w+)            # username
     (?::(\w+))?      # password
