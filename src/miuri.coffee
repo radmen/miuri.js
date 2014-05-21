@@ -3,7 +3,7 @@
 
   MIT licensed
 
-  Copyright (C) 2012 Radoslaw Mejer, http://github.com/radmen
+  Copyright (C) 2014 Radoslaw Mejer, http://github.com/radmen
 ###
 regex = ///
 
@@ -128,6 +128,8 @@ class Miuri
   password: (password) -> @retrieve('password', password)
 
   host: (host) -> @retrieve('host', host)
+  
+  hostname: (host) -> @host(host)
 
   port: (port) -> @retrieve('port', port)
 

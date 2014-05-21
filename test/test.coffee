@@ -12,6 +12,13 @@ test("basic uri parsing", () ->
   equal(parsed.path(), '/')
 )
 
+test("hostname alias", () ->
+  uri_str = 'http://google.com'
+  parsed = new miuri(uri_str)
+
+  equal(parsed.host(), parsed.hostname())
+)
+
 test("various protocols", () ->
   uri = new miuri("chrome-extension://extension/page.html")
   equal(uri.protocol(), "chrome-extension")
