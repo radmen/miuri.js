@@ -1,7 +1,4 @@
-if window? and window.miuri?
-  miuri = window.miuri
-else
-  miuri = require('../lib/miuri.js')
+miuri = require('../lib/miuri.js')
 
 test("basic uri parsing", () ->
   uri_str = 'http://google.com'
@@ -119,19 +116,28 @@ test("uri builder with parital data", () ->
 )
 
 test("pathinfo", () ->
-  # uri = new miuri("http://google.com/path/to/my/file.txt")
-  parsed = new miuri('http://google.com/data/foo/bar/baz.txt')
-  console.log(parsed)
-  equal(parsed.path(), '/data/foo/bar/baz.txt')
-
-  ###
+  uri = new miuri("http://google.com/path/to/my/file.txt")
   pathinfo = uri.pathinfo()
 
-  console.log(pathinfo)
-
-  equal(pathinfo.dirname, "/data/foo/bar")
+  equal(pathinfo.dirname, "/path/to/my")
   equal(pathinfo.basename, "file.txt")
   equal(pathinfo.extension, "txt")
   equal(pathinfo.filename, "file")
-  ###
+)
+
+test("pathinfo without file extensions", () ->
+  uri = new miuri("http://google.com/path/to/my/file")
+  pathinfo = uri.pathinfo()
+
+  equal(pathinfo.dirname, "/path/to/my")
+  equal(pathinfo.basename, "file")
+  equal(pathinfo.extension, "")
+  equal(pathinfo.filename, "file")
+)
+
+test("pathinfo with root path", () ->
+  uri = new miuri()
+  pathinfo = uri.pathinfo()
+  
+  equal(pathinfo.dirname, '/')
 )

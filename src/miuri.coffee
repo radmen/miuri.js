@@ -5,6 +5,7 @@
 
   Copyright (C) 2014 Radoslaw Mejer, http://github.com/radmen
 ###
+
 regex = ///
 
   ^(?:([A-Za-z-+\.]+)://)?     # protocol
@@ -79,15 +80,12 @@ parse_str = (query) ->
 
   return data
 
-build_query = (name, value) ->
+build_query = (name, value, parts = []) ->
   
   if not is_array(value) and not is_object(value)
     return "#{name}=#{encodeURIComponent(value)}"
 
-  parts = []
-
   if is_array(value)
-
     for item in value
       parts.push("#{name}[]=#{encodeURIComponent(item)}")  
 
@@ -163,8 +161,10 @@ class Miuri
     path = @path()
     basename = path.split('/').pop()
     dirname = path.replace(new RegExp("/?#{basename}"), '')
-    extension = basename.split('.').pop()
+    extension = if /\./.test(basename) then basename.split('.').pop() else ''
     filename = basename.replace(new RegExp("\\.#{extension}$"), '')
+    
+    dirname = '/' if dirname is ''
 
     return {path, basename, dirname, extension, filename}
 
