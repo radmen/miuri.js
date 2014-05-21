@@ -49,6 +49,26 @@ An alias fo `host()`
 ### path([path])
 ### query([prop, [value]])
 ### fragment([fragment])
+### pathinfo()
+
+Returns object with path details:
+
+* `dirname`
+* `basename`
+* `extension`
+* `filename`
+
+Example for url `http://google.com/path/to/file.txt`:
+
+```json
+{
+  dirname: '/path/to',
+  basename: 'file.txt',
+  extension: 'txt',
+  filename: 'file'
+}
+```
+
 ### toString()
 
 ## License
