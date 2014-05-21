@@ -133,7 +133,7 @@ class Miuri
 
   port: (port) -> @retrieve('port', port)
 
-  path: (path) -> 
+  path: (path) ->
 
     if path and path[0] isnt '/'
       path = "/#{path}"
@@ -158,6 +158,15 @@ class Miuri
 
 
   fragment: (fragment) -> @retrieve('fragment', fragment)
+
+  pathinfo: ->
+    path = @path()
+    basename = path.split('/').pop()
+    dirname = path.replace(new RegExp("/?#{basename}"), '')
+    extension = basename.split('.').pop()
+    filename = basename.replace(new RegExp("\\.#{extension}$"), '')
+
+    return {path, basename, dirname, extension, filename}
 
   toString: () ->
     uri = ''
