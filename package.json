@@ -1,6 +1,6 @@
 {
   "name": "miuri.js",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Simple URI parser",
   "main": "lib/miuri.js",
   "repository": {
