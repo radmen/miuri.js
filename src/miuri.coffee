@@ -5,6 +5,7 @@
 
   Copyright (C) 2014 Radoslaw Mejer, http://github.com/radmen
 ###
+
 regex = ///
 
   ^(?:([A-Za-z-+\.]+)://)?     # protocol
@@ -79,15 +80,12 @@ parse_str = (query) ->
 
   return data
 
-build_query = (name, value) ->
+build_query = (name, value, parts = []) ->
   
   if not is_array(value) and not is_object(value)
     return "#{name}=#{encodeURIComponent(value)}"
 
-  parts = []
-
   if is_array(value)
-
     for item in value
       parts.push("#{name}[]=#{encodeURIComponent(item)}")  
 
@@ -133,7 +131,7 @@ class Miuri
 
   port: (port) -> @retrieve('port', port)
 
-  path: (path) -> 
+  path: (path) ->
 
     if path and path[0] isnt '/'
       path = "/#{path}"
@@ -158,6 +156,17 @@ class Miuri
 
 
   fragment: (fragment) -> @retrieve('fragment', fragment)
+
+  pathinfo: ->
+    path = @path()
+    basename = path.split('/').pop()
+    dirname = path.replace(new RegExp("/?#{basename}"), '')
+    extension = if /\./.test(basename) then basename.split('.').pop() else ''
+    filename = basename.replace(new RegExp("\\.#{extension}$"), '')
+    
+    dirname = '/' if dirname is ''
+
+    return {path, basename, dirname, extension, filename}
 
   toString: () ->
     uri = ''

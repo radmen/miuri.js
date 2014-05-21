@@ -1,7 +1,4 @@
-if window? and window.miuri?
-  miuri = window.miuri
-else
-  miuri = require('../lib/miuri.js')
+miuri = require('../lib/miuri.js')
 
 test("basic uri parsing", () ->
   uri_str = 'http://google.com'
@@ -30,6 +27,12 @@ test("various protocols", () ->
   equal(uri.protocol(), "https")
 )
 
+test("long path", () ->
+  parsed = new miuri('http://google.com/data/foo/bar/baz.txt')
+
+  equal(parsed.path(), '/data/foo/bar/baz.txt')
+)
+
 test("complex uri parsing", () ->
   uri_str = 'ftp://user:pass@google.com:8080/data?foo=1&bar=2#more'
   parsed = new miuri(uri_str)
@@ -42,7 +45,7 @@ test("complex uri parsing", () ->
   equal(parsed.path(), '/data')
   equal(parsed.fragment(), 'more')
 
-  query = 
+  query =
     foo: 1
     bar: 2
 
@@ -54,7 +57,7 @@ test("arrays in query", () ->
   query = '?arr[]=1&arr[]=2&test[foo]foo'
   parsed = new miuri(query)
 
-  data = 
+  data =
     arr: [
       1
       2
@@ -110,4 +113,31 @@ test("uri builder with parital data", () ->
     .fragment('more')
 
   equal(uri.toString(), '/data?t=title#more')
+)
+
+test("pathinfo", () ->
+  uri = new miuri("http://google.com/path/to/my/file.txt")
+  pathinfo = uri.pathinfo()
+
+  equal(pathinfo.dirname, "/path/to/my")
+  equal(pathinfo.basename, "file.txt")
+  equal(pathinfo.extension, "txt")
+  equal(pathinfo.filename, "file")
+)
+
+test("pathinfo without file extensions", () ->
+  uri = new miuri("http://google.com/path/to/my/file")
+  pathinfo = uri.pathinfo()
+
+  equal(pathinfo.dirname, "/path/to/my")
+  equal(pathinfo.basename, "file")
+  equal(pathinfo.extension, "")
+  equal(pathinfo.filename, "file")
+)
+
+test("pathinfo with root path", () ->
+  uri = new miuri()
+  pathinfo = uri.pathinfo()
+  
+  equal(pathinfo.dirname, '/')
 )
