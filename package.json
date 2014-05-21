@@ -15,5 +15,11 @@
     "uri"
   ],
   "author": "Radosław Mejer <radmen@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "coffee-script": "^1.7.1",
+    "jitter": "^1.3.0",
+    "qunit": "^0.6.3",
+    "uglify-js": "^2.4.13"
+  }
 }
