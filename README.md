@@ -43,6 +43,8 @@ uri.hostname('bing.com')
 ### username([username])
 ### password([password])
 ### host([host])
+### hostname([host])
+An alias fo `host()`
 ### port([port])
 ### path([path])
 ### query([prop, [value]])
