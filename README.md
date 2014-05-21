@@ -62,10 +62,10 @@ Example for url `http://google.com/path/to/file.txt`:
 
 ```json
 {
-  dirname: '/path/to',
-  basename: 'file.txt',
-  extension: 'txt',
-  filename: 'file'
+  dirname: "/path/to",
+  basename: "file.txt",
+  extension: "txt",
+  filename: "file"
 }
 ```
 
